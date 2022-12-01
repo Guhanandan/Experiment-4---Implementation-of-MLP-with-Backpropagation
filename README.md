@@ -119,6 +119,97 @@ Normalize our dataset.
 
 ## PROGRAM 
 
-## OUTPUT 
+~~~
+#Developed by : Guhanandan V
+#Reg.No : 212221220014
+#Problem to implement a Multilayer Perceptron for Multi class-classification.
 
-## RESULT
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+data=pd.read_csv("IRIS.csv")
+
+data.head()
+
+name=["sepal_length","sepal_width","petal_length","petal_width"]
+
+x=data.iloc[:,0:4]
+
+y=data.select_dtypes(include=[object])
+
+x.head()
+
+y.head()
+
+from sklearn import preprocessing
+
+label_encoder=preprocessing.LabelEncoder()
+
+data['species']=label_encoder.fit_transform(data['species'])
+
+data['species'].unique()
+
+from sklearn.model_selection import train_test_split
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.20)
+
+from sklearn.preprocessing import StandardScaler
+scaler=StandardScaler()
+
+scaler.fit(x_train)
+
+x_train=scaler.transform(x_train)
+
+x_test=scaler.transform(x_test)
+
+from sklearn.metrics import classification_report, confusion_matrix
+from sklearn.neural_network import MLPClassifier
+
+mlp=MLPClassifier(hidden_layer_sizes=(10,10,10),max_iter=1000)
+
+mlp.fit(x_train,y_train.values.ravel())
+
+predictions=mlp.predict(x_test)
+
+print(predictions)
+
+print(confusion_matrix(y_test,predictions))
+
+print(classification_report(y_test,predictions))
+
+~~~
+
+## OUTPUT:
+data.head():
+
+![1](https://user-images.githubusercontent.com/100425381/205034363-9751da05-a1b1-490b-af65-719f9aa740bb.png)
+
+
+x.head():
+
+![2](https://user-images.githubusercontent.com/100425381/205034374-7ee5b90d-4d66-4182-8c22-52c91df6f795.png)
+
+
+y.head():
+
+![3](https://user-images.githubusercontent.com/100425381/205034382-ee7b1365-f5f5-4138-9363-7bddaea6abff.png)
+
+
+Printing the predictions:
+
+![4](https://user-images.githubusercontent.com/100425381/205034391-4f78d40e-9a25-4aa9-8eea-c77124a34570.png)
+
+
+Confusion matrix:
+
+![5](https://user-images.githubusercontent.com/100425381/205034400-bca4601e-1488-47d2-a157-3bf6549f7c16.png)
+
+
+Classification report():
+
+![6](https://user-images.githubusercontent.com/100425381/205034414-2d1452e9-24ea-4ed8-ab6d-e882ce0085ad.png)
+
+
+## RESULT:
+Thus, a program to implement a Multilayer Perceptron for Multi class classification is developed and successfully executted.
+
